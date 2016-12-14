@@ -1,0 +1,22 @@
+{
+  "name": "leaflet-geojson-layers",
+  "version": "1.0.0",
+  "description": "Framework to test rendering speed of layers represented by geojson",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbucknell/leaflet-geojson-layers.git"
+  },
+  "author": "Mary Bucknell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbucknell/leaflet-geojson-layers/issues"
+  },
+  "homepage": "https://github.com/mbucknell/leaflet-geojson-layers#readme",
+  "dependencies": {
+    "leaflet.vectorgrid": "^1.1.0"
+  }
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/leaflet/dist/leaflet.js"></script>
+		<script src="node_modules/leaflet.vectorgrid/dist/Leaflet.VectorGrid.bundled.js"></script>
+	</head>
+	<body>
+		<div><label>Geojson source</label><input type="text" /></div>
+		<div>
+			<div id="map-geojson" style="display:inline-block; height: 300px; width: 45%; margin: 10px;"></div>
+			<div id="map-vectortile" style="display:inline-block; height: 300px; width: 45%; margin: 10px;"></div>
+		</div>
+		<script>
+				var mapGeojson = L.map('map-geojson', {
+					center: [37.0, -100.0],
+					zoom: 3
+				});
+				var mapVectorTile = L.map('map-vectortile', {
+					center: [37.0, -100.0],
+					zoom: 3
+				});
+				var geojsonLayer, vectortileLayer;
+				$('input[type="text"]').change(function() {
+					console.log('Retrieving geojson');
+					$.getJSON($(this).val())
+						.done(function(resp) {
+							var startGeojson, endGeojson;
+							var startVector, endVector;
+							var bounds;
+
+							if (geojsonLayer) {
+								mapGeojson.removeLayer(geojsonLayer);
+							}
+
+							startGeojson = (new Date()).valueOf();
+							geojsonLayer = L.geoJSON(resp)
+							mapGeojson.fitBounds(geojsonLayer.getBounds());
+							mapGeojson.addLayer(geojsonLayer);
+							endGeojson = (new Date()).valueOf();
+							console.log('Render geojsontime: ' + (endGeojson - startGeojson));
+							bounds = geojsonLayer.getBounds();
+*/
+							if (vectortileLayer) {
+								mapVectorTile.removeLayer(vectortileLayer);
+							}
+
+							startVector = (new Date()).valueOf();
+							vectortileLayer = L.vectorGrid.slicer(resp, {});
+							mapVectorTile.fitBounds(bounds); */
+							mapVectorTile.addLayer(vectortileLayer);
+							endVector = (new Date()).valueOf();
+							console.log('Render vector tile time:' + (endVector - startVector));
+						})
+						.fail(function() {
+							console.log('Unable to retrieve layer');
+							if (geojsonLayer) {
+								mapGeojson.removeLayer(geojsonLayer);
+							}
+							if (vectortileLayer) {
+								mapVectorTile.removeLayer(vectortileLayer);
+							}
+						})
+				});
+		</script>
+	</body>
+</html>
