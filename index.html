@@ -41,14 +41,14 @@
 							endGeojson = (new Date()).valueOf();
 							console.log('Render geojsontime: ' + (endGeojson - startGeojson));
 							bounds = geojsonLayer.getBounds();
-*/
+
 							if (vectortileLayer) {
 								mapVectorTile.removeLayer(vectortileLayer);
 							}
 
 							startVector = (new Date()).valueOf();
 							vectortileLayer = L.vectorGrid.slicer(resp, {});
-							mapVectorTile.fitBounds(bounds); */
+							mapVectorTile.fitBounds(bounds);
 							mapVectorTile.addLayer(vectortileLayer);
 							endVector = (new Date()).valueOf();
 							console.log('Render vector tile time:' + (endVector - startVector));
